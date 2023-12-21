@@ -93,10 +93,10 @@ try:
                 add_user = input(">").lower()
                 if add_user == "y":
                     user_name_getter()
-                elif add_user == "n"
+                elif add_user == "n":
                     break
-        else:
-            continue
+                else:
+                    continue
             while True:
                 print("Create your password")
                 password_attempt1 = input(">")
