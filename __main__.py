@@ -1,4 +1,5 @@
 try:
+    time_form = "%H:%M"
     try:
         from rich import print
         from sys import stdout
@@ -54,7 +55,8 @@ try:
         "date":"prints the date",
         "python":"runs the python interprter",
         "echo":"prints what you put",
-        "exit":"stops the program"
+        "exit":"stops the program",
+        "settime":"changes the time formating"
     }
 
     print("Hi I am chatter your chatbot!")
@@ -109,7 +111,7 @@ try:
                     names[username] = password_attempt1
                     break
                 else:
-                    print("[red]PasswordMatchError:\n   password_attempt1 ≠≠ password_attempt2\nplease re-enter password")
+                    print("[red]PasswordMatchError:\n   password_attempt1 ≠≠ password_attempt2\nplease re-enter password[red]")
         
     user_name_getter()
 
@@ -194,7 +196,7 @@ try:
         elif cmd.startswith("echo"):
             print(cmd[5:])
         elif cmd == "time":
-            print(date.strftime("[white]%X[white]"))
+            print(date.strftime(f"[white]{time_form}[white]"))
         elif cmd.startswith("strftime "):
             print(date.strftime(cmd[9:]))
         elif cmd == "date":
@@ -203,11 +205,21 @@ try:
             messsage = choose("Times","What format do you want to see the time?",
                             ["12:59 pm","24:59"])
             if messsage == "12:59 pm":
-                time_form = "%I:%M %P"
+                time_form = "%I:%M %p"
             elif messsage == "24:59":
                 time_form = "%H:%M"
+        elif cmd == "dir(echo)":
+            print("type echo and after type what you would like to be echoed\nEx: echo hello\n$ hello")
+        elif cmd == "dir(python)":
+            print("type python adn you will be brought into the python shell/interpreter")
+        elif cmd == "dir(date)":
+            print("type date to print the current date")
+        elif cmd == "dir(time)":
+            print("type time to print the current time")
+        elif cmd == "dir(exit)":
+            print("type exit to exit the Chatter terminal")
         else:
-            print(f'[red]UndefinedCommandError:\n   "{cmd}"\UndefinedCommandError: "{cmd}" is not defined: type "help" for avalible commands[red]')
+            print(f'[red]Error:\n   "{cmd}"\nUndefinedCommandError: "{cmd}" is not defined: type "help" for avalible commands[red]')
             
             
             
