@@ -1,5 +1,6 @@
 try:
     time_form = "%H:%M"
+    
     try:
         from rich import print
         from sys import stdout
@@ -16,6 +17,7 @@ try:
         os.mkdir(f"{os.environ['USERPROFILE']}/chatter")
     except FileExistsError:
         pass
+    
     write = stdout.write
     def up(amount):
         write(f"\u001b[{amount}A")
@@ -86,14 +88,14 @@ try:
                 print("Wrong password please try again")
                 pass_attempts += 1
         else:
-            print("Would you like to add a user [Y]es or [N]o")
+            print("Would you like to create a user [Y]es or [N]o")
             add_user = input(">").lower()
             if add_user == "n":
                 user_name_getter()
             else:
                 pass
             while True:
-                print("Enter your password")
+                print("Create your password")
                 password_attempt1 = input(">")
                 password_attempt1_length = len(password_attempt1)
                 password_attempt1_length += 1
