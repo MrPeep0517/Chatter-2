@@ -16,7 +16,6 @@ try:
         os.mkdir(f"{os.environ['USERPROFILE']}/chatter")
     except FileExistsError:
         pass
-
     write = stdout.write
     def up(amount):
         write(f"\u001b[{amount}A")
