@@ -88,12 +88,15 @@ try:
                 print("Wrong password please try again")
                 pass_attempts += 1
         else:
-            print("Would you like to create a user [Y]es or [N]o")
-            add_user = input(">").lower()
-            if add_user == "n":
-                user_name_getter()
-            else:
-                pass
+            while True:
+                print("Do you already have a Chatter account [Y]es or [N]o")
+                add_user = input(">").lower()
+                if add_user == "y":
+                    user_name_getter()
+                elif add_user == "n"
+                    break
+        else:
+            continue
             while True:
                 print("Create your password")
                 password_attempt1 = input(">")
