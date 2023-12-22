@@ -57,7 +57,8 @@ try:
         "python":"runs the python interprter",
         "echo":"prints what you put",
         "exit":"stops the program",
-        "settime":"changes the time formating"
+        "settime":"changes the time formating",
+        "create_user":"creates a new user"
     }
 
     print("Hi I am chatter your chatbot!")
@@ -69,7 +70,7 @@ try:
             names = {}
             
         print("Please enter your username")
-        username = input(">").lower()
+        username = input(">").capitalize()
         if username in names.keys():
             print(f"Welcome {username}")
             while True:
@@ -222,12 +223,41 @@ try:
             print("type time to print the current time")
         elif cmd == "dir(exit)":
             print("type exit to exit the Chatter terminal")
+        elif cmd == "create_user":
+            while True:
+                print("Please enter your username")
+                username2 = input(">")
+                if username2 in names.keys():
+                    print("please enter your password")
+                    password = input(">")
+                    break
+                else:
+                    print(f'[red]Error:\n    "{username2}"\nDataBaseError: "{username2}" is not in data base[red]')
+                    continue
+            if password == names.get(username2):
+                print("create the new username")
+                new_username = input(">").capitalize()
+                up(1)
+                print("create the new password")
+                new_password1 = input(">")
+                up(1)
+                new_password1_length = len(new_password1)
+                new_password1_length += 1
+                print("*" * new_password1_length)
+                print("comfirm your new password")
+                new_password2 = input(">")
+                up(1)
+                new_password2_length = len(new_password2)
+                new_password2_length += 1
+                print("*" * new_password2_length)
+                if new_password1 == new_password2:
+                    try:
+                        names[new_username] = new_password2
+                        print("new user added")
+                    except:
+                        print('[red]Error:[red]\n    249    [yellow]save([yellow][purple]{[purple][blue]new_username: new_password2[blue][purple]}[purple], [blue]f[blue]"[green]os[green].[blue]environ[[blue]"USERPROFILE"[blue]][blue][pink]}[pink]/chatter/names.pk"[yellow])[yellow]\n[red]SaveError: save cannot be executed[red]')
+                        
         else:
-            print(f'[red]Error:\n   "{cmd}"\nUndefinedCommandError: "{cmd}" is not defined: type "help" for avalible commands[red]')
-            
-            
-            
-            
-            
+            print(f'[red]Error:\n   "{cmd}"\nUndefinedCommandError: "{cmd}" is not defined: type "help" for avalible commands[red]')           
 except KeyboardInterrupt:
     quit()
