@@ -1,4 +1,7 @@
+# setting the deafalt time format
 time_form = "%H:%M"
+
+
 # main imports
 try:
     from rich import print
@@ -18,21 +21,26 @@ try:
 except FileExistsError:
     pass
 
+write_2 = stdout.write
+
+
+# defining the class write
+class write():
+    def up(amount, write_2):
+        '''Moves the printing line up a specified amount.'''
+        write_2(f"\u001b[{amount}A")
+    def right(amount, write_2):
+        '''Moves the printing line right a specified amount.'''
+        write_2(f"\u001b[{amount}C")
+    def down(amount, write_2):
+        '''Moves the printing line down a specified amount.'''
+        up(-amount, write_2)
+    def left(amount, write_2):
+        '''Moves the printing line left a specified amount.'''
+        right(-amount, write_2)
+
 
 # defining main functions
-write = stdout.write
-def up(amount):
-    '''Moves the printing line up a specified amount.'''
-    write(f"\u001b[{amount}A")
-def right(amount):
-    '''Moves the printing line right a specified amount.'''
-    write(f"\u001b[{amount}C")
-def down(amount):
-    '''Moves the printing line down a specified amount.'''
-    up(-amount)
-def left(amount):
-    '''Moves the printing line left a specified amount.'''
-    right(-amount)
 def save(data, filename):
     '''Saves a file.'''
     with open(filename,"wb") as file:
@@ -58,8 +66,10 @@ def choose(item_name:str,message:str,items:list):
         ),
     ]
     username = inquirer.prompt(questions)
-    return username[item_name] 
+    return username[item_name]
 
+
+# setting password attempts & makeing a list of commands
 pass_attempts = 0
 cmd_helps = {
     "time":"prints the time",
@@ -82,7 +92,7 @@ except FileNotFoundError:
     
 
 # gets user names
-def user_name_getter(names: list[str]):
+def user_name_getter(names: list[str]) -> None:
     '''Gets the username from the user to log into chatter-2.'''
     print("please enter your username")
     username = input(">").capitalize()
@@ -96,7 +106,7 @@ def user_name_getter(names: list[str]):
             print("please enter your password")
             password_attempt = input(">")
             password_length = len(password_attempt) + 1
-            up(1)
+            write.up(1, write_2)
             print("*" * password_length)
             if password_attempt == names[username]:
                 break
@@ -117,13 +127,13 @@ def user_name_getter(names: list[str]):
             password_attempt1 = input(">")
             password_attempt1_length = len(password_attempt1)
             password_attempt1_length += 1
-            up(1)
+            write.up(1, write_2)
             print("*" * password_attempt1_length)
             print("Confirm your password")
             password_attempt2 = input(">")
             password_attempt2_length = len(password_attempt2)
             password_attempt2_length += 1
-            up(1)
+            write.up(1, write_2)
             print("*" * password_attempt2_length)
             if password_attempt1 == password_attempt2:
                 print("New user added")
@@ -148,6 +158,7 @@ while True:
         for x,y in zip(cmd_helps.keys(),cmd_helps.values()):
             print(x,y)
     elif cmd == "exit":
+        clear()
         break
     elif cmd == "python":
         import sys
@@ -254,13 +265,13 @@ while True:
             new_username = input(">").capitalize()
             print("create the new password")
             new_password1 = input(">")
-            up(1)
+            write.up(1, write_2)
             new_password1_length = len(new_password1)
             new_password1_length += 1
             print("*" * new_password1_length)
             print("comfirm your new password")
             new_password2 = input(">")
-            up(1)
+            write.up(1, w)
             new_password2_length = len(new_password2)
             new_password2_length += 1
             print("*" * new_password2_length)
